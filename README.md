@@ -15,6 +15,7 @@ This project is to sum up Node.js and Angular 5 course.
     -Modules
     -Routing
     -TypeScript
+    
 -NODE.JS
     - Routing
     - Password encryption
