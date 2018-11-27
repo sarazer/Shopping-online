@@ -1,0 +1,41 @@
+<div class="ui left icon field input" [ngClass]="{'error': lastName.invalid && (lastName.dirty || lastName.touched)}">
+  <i class="address book icon"></i>
+  <input type="text" placeholder="Last name" [(ngModel)]=user.last_name required #lastName="ngModel" (input)="invalid = false; registerFaild = false">
+</div>
+<br><br>
+<div class="ui left icon field input" [ngClass]="{'error': firstName.invalid && (firstName.dirty || firstName.touched)}">
+  <i class="address book outline icon"></i>
+  <input type="text" placeholder="First name" [(ngModel)]="user.first_name" required #firstName="ngModel" (input)="invalid = false; registerFaild = false">
+</div>
+<br><br>
+<div class="ui left icon field input">
+  <div class="ui fluid search dropdown">
+    <div class="text"></div>
+    <i class="dropdown icon"></i>
+  </div>
+</div>
+<br><br>
+<div class="ui left icon field input" [ngClass]="{'error': house.invalid && (house.dirty || house.touched)}">
+  <i class="warehouse icon"></i>
+  <input type="text" placeholder="house number" [(ngModel)]=user.house_number required #house="ngModel" (input)="invalid = false; registerFaild = false">
+</div>
+<br><br>
+<div class="ui left icon field input" [ngClass]="{'error': street.invalid && (street.dirty || street.touched)}">
+  <i class="building outline icon"></i>
+  <input type="text" placeholder="street" [(ngModel)]=user.street required #street="ngModel" (input)="invalid = false; registerFaild = false">
+</div>
+<br><br>
+<div class="ui error message" [ngClass]="{'visible': invalid}">
+  <ul class="list">
+    <li *ngIf="lastName.errors"> Please fill in your last name</li>
+    <li *ngIf="firstName.errors"> Please fill in your first name</li>
+    <li *ngIf="!user.city_id"> Please choose your city </li>
+    <li *ngIf="house.errors"> Please fill in your house number</li>
+    <li *ngIf="street.errors">Please fill in your street</li>
+  </ul>
+</div>
+<div class="ui error message" [ngClass]="{'visible': registerFaild}">
+  Register is failed
+</div>
+<br><br>
+<button class="ui larg yellow submit button" (click)=finishRegister()> Finish</button>

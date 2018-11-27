@@ -1,0 +1,11 @@
+.sub.header {
+    max-width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.ui.buttons {
+    margin-top: 40px;
+}

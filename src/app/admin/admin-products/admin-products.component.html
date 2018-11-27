@@ -1,0 +1,22 @@
+<div class="ui segment main">
+  <table class="ui striped selectable table">
+    <thead>
+      <tr>
+        <th>Barcode number</th>
+        <th>Image</th>
+        <th>Price</th>
+        <th>Product name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products" routerLink="/admin/insert-product/{{product.product_id}}">
+        <td>{{product.product_id}}</td>
+        <td>
+          <img src={{product.image}} class="ui tiny image" >
+        </td>
+        <td><i class="dollar sign small icon"></i>{{product.price}}</td>
+        <td>{{product.product_name}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,15 @@
+.main {
+    max-width: 800px;
+}
+
+.incart .ui.circular.segment {
+    display: inline-block !important;
+    margin: 20px 20px !important;
+}
+
+.icon.centered {
+    display: inline-block !important;
+}
+i.icon {
+    display: inline !important;
+}

@@ -23,9 +23,15 @@
               "src/assets"
             ],
             "styles": [
+              "semantic/dist/semantic.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/jquery-ui/ui/widgets/datepicker.js",
+              "node_modules/jquery-ui/ui/i18n/datepicker-en-GB.js",
+              "semantic/dist/semantic.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -105,7 +111,6 @@
     "shopping-online-e2e": {
       "root": "e2e/",
       "projectType": "application",
-      "prefix": "",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",

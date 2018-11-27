@@ -1,0 +1,19 @@
+<div class="ui stackable menu">
+  <div class="item">
+    <img src="../assets/images/logo-mysupermarket.png" class="ui small centered image">
+  </div>
+  <a class="item ui header green" routerLink="./insert-product">
+    <i class="plus icon"></i>Add New Product
+  </a>
+  <div class="right menu">
+    <div class="item ui header blue">
+      <i class="user icon"></i>
+      {{user.data.first_name}} {{user.data.last_name}}&nbsp;&nbsp;
+    </div>
+    <a class="item ui header blue" (click)=logout()>
+      <i class="sign out icon"></i>Logout&nbsp;&nbsp;
+    </a>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

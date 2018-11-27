@@ -1,0 +1,16 @@
+.form {
+    max-width: 600px;
+    margin: 20px auto;
+}
+.ui.fluid.dropdown {
+    border: 1px solid rgba(34, 36, 38, .15);
+    border-radius: .28571429rem;
+    box-shadow: 0 0 0 0 transparent inset;
+    padding: 9.5px 37.4px 9.5px 14px;
+}
+.form .fluid:not(.dropdown) {
+    margin: 10px auto;
+}
+
+
+

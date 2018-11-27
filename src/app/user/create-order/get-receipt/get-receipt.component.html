@@ -1,0 +1,94 @@
+<div class="ui tall stacked segment printArea">
+  <h3 class="center">Receipt {{lastOrder.id}}</h3>
+  <div class="ui equal width grid">
+    <div class="column">
+      <p>
+        {{user.last_name}} {{user.first_name}}
+      </p>
+      <p>
+        {{lastOrder.delivery_street}} {{lastOrder.cityName}}
+      </p>
+      <p>
+        {{user.phone}}
+      </p>
+    </div>
+    <div class="column">
+      <p>
+        <strong>Order date:</strong>
+        {{lastOrder.order_date}}
+      </p>
+      <p>
+        <strong> Delivery date:</strong>
+        {{lastOrder.delivery_date}}
+      </p>
+    </div>
+  </div>
+  <table class="ui selectable table">
+    <thead>
+      <tr>
+        <th> Product:</th>
+        <th> Price:</th>
+        <th> Quantity: </th>
+        <th> Sum Total: </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of lastOrderData">
+        <td>
+          <h4 class="ui header">
+            <div class="content">
+              {{item.product_name}}
+              <div class="sub header">
+                {{item.product_id}}
+              </div>
+            </div>
+          </h4>
+        </td>
+        <td>
+          <i class="dollar sign small icon"></i>
+          {{item.price | number:'1.2'}}
+        </td>
+        <td>
+          <div>{{item.quantity}}</div>
+        </td>
+        <td>
+          <i class="dollar sign small icon"></i>
+          {{item.total | number:'1.2'}}
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="4"></th>
+      </tr>
+      <tr class="ui header">
+        <th colspan="2" class="left aligned">
+          Total:
+        </th>
+        <th>{{cartCount()}} products</th>
+        <th>
+          <i class="dollar sign small icon"></i>
+          {{cartTotal() | number: '1.2'}}
+        </th>
+      </tr>
+      <tr>
+        <th colspan="4" class="ui header left aligned">
+          **Digits of payment        {{lastOrder.credit_card_info}}
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+<div class="ui center aligned container noscreen">
+  <img src="assets/images/logo-mysupermarket.png" class="item ui tiny centered image">
+</div>
+
+<div class="ui fluid buttons noprint">
+  <button class="ui olive button" (click)="onPrintClick()">
+   <i class="print icon"></i>  Print receipt
+  </button>
+  <div class="or" data-text="or"></div>
+  <button class="ui positive green button" routerLink='/home'>
+    <i class="home icon"></i>  Homepage
+  </button>
+</div>

@@ -1,0 +1,88 @@
+<div class="main">
+  <div class="ui stackable centered grid">
+    <div class="ten wide column">
+      <div class="ui segment">
+        <div class="ui form">
+          <h2 class="ui header green">{{editMode ? "Edit" : "Add"}} product</h2>
+          <div *ngIf="status==0">
+            <h4 class="ui dividing yellow header">Product Details:</h4>
+            <div class="three fields">
+              <div class="field">
+                <label>Barcode number:</label>
+                <input placeholder='Barcode number' type="text" [(ngModel)]="product.product_id">
+              </div>
+              <div class="field">
+                <label>Name:</label>
+                <input placeholder="product name" type="text" [(ngModel)]="product.product_name">
+              </div>
+              <div class="field">
+                <label>Price:</label>
+                <input placeholder="product price" type="number" [(ngModel)]="product.price">
+              </div>
+            </div>
+            <h4 class="ui dividing orange header">Categories:</h4>
+            <div class="ui stackable grid row">
+              <div *ngFor="let category of categories" class="inline four wide column field">
+                <div class="ui checkbox">
+                  <label>{{category.category_name}}</label>
+                  <input type="checkbox" value="{{category.category_id}}" [(ngModel)]="matchingCategory[category.category_id]">
+                </div>
+              </div>
+            </div>
+            <h4 class="ui dividing purple header">Image:</h4>
+            <div class="ui stackable two column grid row">
+              <div class="column">
+                <div class="field">
+                  <label>Choose image</label>
+                  <input id="imageUpload" type="file" (change)="changeFile($event)" placeholder="Upload file..." />
+                </div>
+                <div class="field">
+                  <label>Insert external image link</label>
+                  <input id="image" type="text" placeholder="insert external image link" (input)="changeImage(product.image=$event.target.value)"
+                    [(ngModel)]=image>
+                </div>
+              </div>
+              <div class="column">
+                <img class="ui image" src="{{product.image}}">
+              </div>
+            </div>
+            <br />
+            <div *ngIf="validate()" class="ui submit green button fluid" (click)=sendForm()>Save</div>
+          </div>
+          <div *ngIf="status==1">
+            <div class="ui segment">
+              <br>
+              <div class="ui active dimmer">
+                <h3 class="ui header orange">
+                  <br>
+                  <br> Please wait....
+                </h3>
+                <div class="ui text loader">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="status==2">
+            <br>
+            <br>
+            <h3 class="center">Save the product was successfully</h3>
+            <div class="ui fluid buttons">
+              <button class="ui positive plus icon button" (click)="insertProduct()">Insert more producd</button>
+              <div class="or" data-text="or"></div>
+              <button class="ui home icon button" routerLink="/admin">Back to Homepage</button>
+            </div>
+          </div>
+          <div *ngIf="status==3">
+            <br>
+            <h3 class="center">Failed to save the new product</h3>
+            <div class="ui fluid buttons">
+              <button class="ui positive redo icon button" (click)="sendForm()">Try again</button>
+              <div class="or" data-text="or"></div>
+              <button class="ui edit icon button" (click)="tryAgain()">Edit product details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

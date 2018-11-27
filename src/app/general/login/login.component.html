@@ -1,0 +1,42 @@
+<div class="ui raised center aligned padded container segment teal">
+  <img src="assets/images/logo-mysupermarket.png" class="ui small centered image">
+  <h1 class="ui header teal">
+    <i class="sign in icon"></i>Login
+  </h1>
+  <br>
+  <div class="ui form">
+    <div class="ui stacked segment teal">
+      <p class="ui header grey">
+        Enter the ID and password you registered with the site
+        <br> Don't have an account yet?
+        <a routerLink="/register">Register</a>
+      </p>
+      <br>
+      <div class="ui left icon field input" [ngClass]="{'error': (user_id.invalid || !validateID()) && (user_id.dirty || user_id.touched)}">
+        <i class="id card outline icon"></i>
+        <input type="text" name="id" placeholder="ID number" required #user_id="ngModel" [(ngModel)]=user.id (input)="invalid = false; loginFaild = false;">
+      </div>
+      <br>
+      <br>
+      <div class="ui left icon field input" [ngClass]="{'error':password.invalid && (password.dirty || password.touched)}">
+        <i class="lock icon"></i>
+        <input type="password" name="passowrd" placeholder="passowrd" required minlength="4" #password="ngModel" [(ngModel)]=user.password
+          (input)="invalid = false; loginFaild = false;">
+      </div>
+      <div class="ui error message" [ngClass]="{'visible': invalid}">
+        <ul class="list container">
+          <li *ngIf="user_id.errors"> Please fill in your ID </li>
+          <li *ngIf="!user_id.errors && !validateID()">ID is invalid</li>
+          <li *ngIf="password.errors && password.errors.required"> Please fill in your password </li>
+          <li *ngIf="password.errors && password.errors.minlength"> Must be 4+ letters or numbers</li>
+        </ul>
+      </div>
+      <div class="ui error message" [ngClass]="{'visible': loginFaild}">
+        Login is failed
+      </div>
+      <br>
+      <br>
+      <button class="ui larg teal submit button" (click)=login()>Login</button>
+    </div>
+  </div>
+</div>

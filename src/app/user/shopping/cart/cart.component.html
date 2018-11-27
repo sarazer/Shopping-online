@@ -1,0 +1,88 @@
+<div class="one wide column">
+  <button class="ui circular inverted green button pointer" (click)=toggleVisible()>
+    <i class="cart arrow down icon"></i>
+    <span *ngIf="!cartVisible">Show</span>
+    <span *ngIf="cartVisible">Hide</span> cart
+  </button>
+</div>
+<br>
+<div *ngIf="cartVisible" class="four wide column cart">
+  <div *ngIf="cart.data.length">
+    <table class="ui selectable  celled table">
+      <thead>
+        <tr>
+          <th>Product:</th>
+          <th>Quantity:</th>
+          <th>Sum:</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tr *ngFor="let product of cart.data">
+        <td>
+          <h4 class="ui image header">
+            <img src="{{product.image}}" class="ui small bordered image">
+            <div class="content">
+              {{product.product_name}}
+              <div class="sub header">
+                <i class="dollar sign small icon"></i>
+                {{product.price | number:'1.2'}}
+              </div>
+            </div>
+          </h4>
+        </td>
+        <td>
+          <div *ngIf="editProduct!=product" class="pointer" title="Click to change the quantity" (click)="editProduct=product; editQuantity=product.quantity">{{product.quantity}}</div>
+          <div *ngIf="editProduct==product" class=" ui left action input">
+            <input type="number" [(ngModel)]="editQuantity" min="1" style="width: 80px">
+            <div class="ui icon buttons">
+              <button class="ui button" (click)="updateQuntity()">
+                <i class="edit green icon"></i>
+              </button>
+              <button class="ui button" (click)="editProduct=null">
+                <i class="window close outline red icon"></i>
+              </button>
+            </div>
+          </div>
+        </td>
+        <td>
+          <i class="dollar sign small icon"></i>
+          {{product.total | number:'1.2'}}
+        </td>
+        <td>
+          <a class="pointer" (click)="deleteItem(product)">
+            <i class="trash red icon"></i>
+          </a>
+        </td>
+      </tr>
+    </table>
+    <div class="ui piled segment">
+      <table class="ui green table">
+        <tr class="ui header green">
+          <td>Cart products:</td>
+          <td>{{cartCount()}}</td>
+        </tr>
+        <tr class="ui header green">
+          <td>Subtotal:</td>
+          <td>
+            <i class="dollar sign small icon"></i>
+            {{cartTotal() | number: '1.2'}}
+          </td>
+        </tr>
+      </table>
+      <div class="ui fluid buttons">
+        <button class="ui positive button" routerLink="/home/create-order">
+          <i class="credit card outline icon"></i>Create an order
+        </button>
+        <div class="or" data-text="or"></div>
+        <button class="ui red button" (click)="deleteCart()">Delete cart
+          <i class="trash icon"></i> 
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!cart.data.length">
+    Your cart is empty, start to shop...
+    <br>
+  </div>
+</div>

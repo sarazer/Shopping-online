@@ -1,0 +1,22 @@
+<div class="ui stackable menu">
+    <div class="item">
+      <img src="../assets/images/logo-mysupermarket.png" class="ui tiny centered image">
+    </div>
+  <a class="item ui header teal" routerLink="./about">
+    <i class="info icon"></i>About</a>
+  <a class="item ui header teal" routerLink="./shopping">
+    <i class="shopping basket icon"></i>Products</a>
+  <a *ngIf="cart.data.length" class="item ui header teal" routerLink="./create-order">
+    <i class="credit card icon"></i>Create an order</a>
+  <div class="right menu"></div>
+  <div class="item ui header blue">
+    <i class="user outline icon"></i>
+    {{user.data.first_name}} {{user.data.last_name}}&nbsp;&nbsp;
+  </div>
+  <a class="item ui header blue" (click)=logout()>
+    <i class="sign out icon"></i>Logout &nbsp;&nbsp;
+  </a>
+</div>
+
+<product></product>
+<router-outlet></router-outlet>

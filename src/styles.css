@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    background-image: url('/assets/images/supermarket.png');
+    background-repeat:no-repeat;
+    background-size: cover;
+    font-family: 'Gentium Book Basic', Georgia, 'Times New Roman', Times, serif;
+}
+
+button {
+    margin: 5px;
+}
+
+card {
+    margin: 10px;
+}

@@ -1,0 +1,45 @@
+<div class="ui form">
+    <div class="ui stacked segment green">
+  <h2 class="ui header green">Delivery details:</h2>
+      <p> Please,Enter shipping address available.
+      <br>And shipping date available.
+        <br> Double-click the items to update the information that you filled in registration.
+      </p>
+      <div class="ui left icon fluid field input" [ngClass]="{'error': lastName.invalid && (lastName.dirty || lastName.touched)}">
+          <i class="address book icon"></i>
+          <input type="text" placeholder="Last name" disabled [(ngModel)]=userData.data.last_name required #lastName="ngModel" (input)="invalid = false; registerFaild = false">
+        </div>
+      <div class="ui left icon fluid field input" [ngClass]="{'error': firstName.invalid && (firstName.dirty || firstName.touched)}">
+        <i class="address book outline icon"></i>
+        <input type="text" placeholder="First name" disabled [(ngModel)]="userData.data.first_name" required #firstName="ngModel" (input)="invalid = false; registerFaild = false">
+      </div>
+      <div class="ui left icon fluid field input" [ngClass]="{'error': house.invalid && (house.dirty || house.touched)}">
+          <i class="warehouse icon"></i>
+          <input type="text" placeholder="house number" [(ngModel)]=user.house_number_ship required #house="ngModel" (input)="invalid = false"
+            (dblclick)=autoHouseNumber()>
+        </div>
+      <div class="ui left icon fluid field input" [ngClass]="{'error': street.invalid && (street.dirty || street.touched)}">
+        <i class="building outline icon"></i>
+        <input type="text" placeholder="street" [(ngModel)]=user.street_name_ship required #street="ngModel" (input)="invalid = false" (dblclick)="autoStreet()">
+      </div>
+      <div class="ui left icon fluid field input">
+        <div class="ui fluid search dropdown" (dblclick)=autoCity()>
+          <div class="text"></div> 
+          <i class="dropdown icon"></i>
+        </div>
+      </div>
+   <div class="ui left icon fluid field input" [ngClass]="{'error': !isShippingValid() && (ship.dirty || ship.touched)}">
+        <i class="calendar icon z-index-10000"></i>
+        <input type="text" class="datePicker z-index-10000" placeholder="shipping date" #ship="ngModel" [(ngModel)]=user.shipping_date required (input)="invalid = false">
+      </div>
+    </div>
+  </div>
+  <div class="ui fluid buttons">
+    <button class="ui olive button" routerLink='/home/create-order'>
+      Go back
+    </button>
+    <div class="or" data-text="or"></div>
+    <button [disabled]="!valid()" class="ui positive green button" (click)=saveData() routerLink='/home/create-order/payment' >
+      <i class="credit card icon"></i> Payment
+    </button>
+  </div>

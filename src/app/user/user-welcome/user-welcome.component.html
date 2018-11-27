@@ -1,0 +1,69 @@
+<div class="ui raised center aligned padded container segment green">
+    <img src="assets/images/logo-mysupermarket.png" class="ui small centered image">
+    <div class="ui section divider"></div>
+    <div *ngIf="user.data.isNew && !this.cart.data.length">
+        <h2 class="ui header teal center">
+            <br> Hellow {{user.data.first_name}} {{user.data.last_name}},
+            <br> Wellcome to My Supermarket!!
+            <br> In our website you can buy all you need for your home
+            <br> and stay at home.
+        </h2>
+        <br>
+        <div class="ui fluid olive button" routerLink="shopping">
+            <i class="shopping bag icon"> Start Shopping </i>
+        </div>
+    </div>
+    <div *ngIf="!user.data.isNew && !this.cart.data.length">
+        <h2 class="ui header teal center">
+            <br> Hellow {{user.data.first_name}} {{user.data.last_name}},
+            <br> Wellcome back to My Supermarket!
+            <br> Your shopping cart is still empty
+            <br>In our website you can buy all you need for your home
+            <br> and stay at home.
+        </h2>
+        <br>
+        <div *ngIf="lastOrder.data.order.id" class="incart">
+            <div class="ui circular segment centered button" routerLink="create-order/print-receipt">
+                <h4 class="ui header olive">Show last order</h4>
+                <h3>#{{lastOrder.data.order.id}}</h3>
+                <i class="shipping fast big olive icon"></i>
+            </div>
+            <br>
+            <br>
+            <div class="ui fluid blue button" routerLink="shopping">
+                <i class="shopping bag icon"> Start Shopping </i>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="this.cart.data.length">
+        <h2 class="ui header teal center">
+            <br> Hellow {{user.data.first_name}} {{user.data.last_name}},
+            <br> Wellcome back to My Supermarket!
+            <br> You don't finsh your shopping....
+            <br> Your shopping cart is waiting for you...
+        </h2>
+        <br>
+        <div class="incart">
+            <div class="ui circular tertiary inverted  yellow segment centered">
+                <h2 class="ui header">Total products</h2>
+                <h3 class="ui header grey">{{cartCount()}}</h3>
+                <i class="shopping basket big green icon"></i>
+            </div>
+            <div class="ui circular tertiary inverted yellow segment centered">
+                <h2 class="ui header">Total price in the cart</h2>
+                <h3 class="ui header grey">{{cartTotal() | number: '1.2'}} $</h3>
+                <i class="shopping cart big green icon"></i>
+            </div>
+        </div>
+        <br>
+        <div class="ui fluid buttons">
+            <button class="ui positive button" routerLink='shopping'>
+                <i class="shopping basket icon"></i>Continue Shopping
+            </button>
+            <div class="or" data-text="or"></div>
+            <button class="ui yellow button" routerLink='shopping' (click)="deleteCart()">
+                <i class="plus square outline icon"></i>Start new shopping
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="ui secondary vertical pointing menu">
+  <div class="item">
+    <div class="ui icon input">
+      <i class="search link icon"></i>
+      <input type="text" placeholder="Search product " [(ngModel)]=search.text (input)=getProducts()>
+    </div>
+  </div>
+  <a *ngFor="let category of categories" class="item active" (click)="search.text=''" routerLink="/home/shopping/{{category.category_id}}">
+    {{category.category_name}}
+  </a>
+</div>

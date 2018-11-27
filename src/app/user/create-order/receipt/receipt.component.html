@@ -1,0 +1,92 @@
+<div class="ui left icon field input">
+  <i class="search icon"></i>
+  <input type="text" placeholder="Search...." [(ngModel)]="searchText">
+</div>
+<table class="ui unstackable  table">
+  <thead>
+    <tr class="ui header">
+      <th>
+        <i class="shopping basket icon"></i>
+        Product:
+      </th>
+      <th>
+        <i class="barcode icon"></i>
+        Barcode:
+      </th>
+      <th>
+        <i class="dollar sign icon"></i>
+        Price:
+      </th>
+      <th>
+        <i class="sort amount up icon"></i>
+        Quantity:
+      </th>
+      <th>
+        <i class="credit card outline icon"></i>
+        Sum Total:
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of cart.data">
+      <td>
+        <h4 class="ui image header">
+          <img src="{{product.image}}" class="ui medium bordered image">
+          <div class="content">
+            <div innerHTML="{{ product.product_name | highlight : searchText}}">
+            </div>
+          </div>
+        </h4>
+      </td>
+      <td>
+        <div innerHTML="{{ product.product_id | highlight : searchText}}">
+        </div>
+      </td>
+      <td>
+        <i class="dollar sign small icon"></i>
+        {{product.price | number:'1.2'}}
+      </td>
+      <td>
+        <div *ngIf="editProduct!=product" class="pointer" title="Click to change the quantity" (click)="editProduct=product; editQuantity=product.quantity">{{product.quantity}}</div>
+        <div *ngIf="editProduct==product" class=" ui left action input">
+          <input type="number" [(ngModel)]="editQuantity" min="1" style="width: 80px">
+          <div class="ui icon buttons">
+            <button class="ui button" (click)="updateQuntity()">
+              <i class="edit green icon"></i>
+            </button>
+            <button class="ui button" (click)="editProduct=null">
+              <i class="window close outline red icon"></i>
+            </button>
+          </div>
+        </div>
+      </td>
+      <td>
+        <i class="dollar sign small icon"></i>
+        {{product.total | number:'1.2'}}
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th class="light-green-bg" colspan="5"></th>
+    </tr>
+    <tr class="ui header">
+      <th colspan="3" class="left aligned">Total items in cart:
+      </th>
+      <th>{{cartCount()}} products</th>
+      <th>
+        <i class="dollar sign small icon"></i>
+        {{cartTotal() | number: '1.2'}}
+      </th>
+    </tr>
+  </tfoot>
+</table>
+<div class="ui fluid buttons">
+  <button class="ui olive button" routerLink='/home/shopping/'>
+    <i class="shopping basket icon"></i> Continue shopping
+  </button>
+  <div class="or" data-text="or"></div>
+  <button class="ui positive green button" routerLink='./shipping'>
+    <i class="fast shipping icon"></i>Continue for shipping details
+  </button>
+</div>

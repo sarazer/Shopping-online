@@ -1,0 +1,68 @@
+<div class="ui raised center aligned padded container segment teal">
+  <img src="assets/images/logo-mysupermarket.png" class="ui small centered image">
+  <h1 class="ui header teal">
+    <i class="user plus icon"></i>Register
+  </h1>
+  <div class="ui form">
+    <div class="ui stacked segment teal">
+      <p class="ui header grey">
+        Already registered?
+        <a routerLink="/login">Login</a>
+      </p>
+      <br>
+      <div *ngIf="state==1">
+        <div class="ui left icon field input" [ngClass]="{'error': (user_id.invalid || !validateID() || isUserId) && (user_id.dirty || user_id.touched)}">
+          <i class="id card icon"></i>
+          <input type="text" name="id" placeholder="ID number" required #user_id="ngModel" [(ngModel)]=user.id (input)="invalid = false; validId()">
+        </div>
+        <br>
+        <br>
+        <div class="ui left icon field input" [ngClass]="{'error': (mail.invalid || !validateEmail()) && (mail.dirty || mail.touched)}">
+          <i class="envelope outline icon"></i>
+          <input type="text" placeholder="email" required #mail="ngModel" [(ngModel)]=user.email (input)="invalid = false">
+        </div>
+        <br>
+        <br>
+        <div class="ui left icon field input" [ngClass]="{'error':phone.invalid && (phone.dirty || phone.touched)}">
+          <i class="phone square icon"></i>
+          <input type="tel" name="phone" minlength="11" placeholder="Tel number" [(ngModel)]=user.phone required #phone="ngModel" (input)="insertHyphen()">
+        </div>
+        <br>
+        <br>
+        <div class="ui left icon field input" [ngClass]="{'error':password.invalid && (password.dirty || password.touched)}">
+          <i class="lock icon"></i>
+          <input type="password" name="passowrd" placeholder="password" required minlength="4" #password="ngModel" [(ngModel)]=user.password
+            (input)="invalid = false">
+        </div>
+        <br>
+        <br>
+        <div class="ui left icon field input" [ngClass]="{'error':(repeatPasword.invalid || !validateRepeatPassword()) && (repeatPasword.dirty || repeatPasword.touched)}">
+          <i class="lock open icon"></i>
+          <input type="password" name="repeatpassowrd" placeholder="repeat passowrd " required minlength="4" #repeatPasword="ngModel"
+            [(ngModel)]=user.repeatPassword (input)="invalid = false">
+        </div>
+        <br>
+        <br>
+        <div class="ui error message" [ngClass]="{'visible': invalid}">
+          <ul class="list">
+            <li *ngIf="user_id.errors">Please fill in your ID</li>
+            <li *ngIf="!user_id.errors && isUserId"> ID you entered is already in use </li>
+            <li *ngIf="!user_id.errors && !validateID()">ID is invalid</li>
+            <li *ngIf="mail.errors">Please fill in your email </li>
+            <li *ngIf="!mail.errors && !validateEmail()">Email is invalid</li>
+            <li *ngIf="phone.errors && phone.errors.required"> Please fill in your phone</li>
+            <li *ngIf="phone.errors && phone.errors.minlength">Must be 9+ numbers</li>
+            <li *ngIf="password.errors && password.errors.required">Please fill in your password</li>
+            <li *ngIf="password.errors && password.errors.minlength"> Must be 4+ letters or numbers </li>
+            <li *ngIf="!password.errors && repeatPasword.errors && repeatPasword.errors.required">Please verify password </li>
+            <li *ngIf="!password.errors && !validateRepeatPassword()">The passwords must be identical </li>
+          </ul>
+        </div>
+        <br>
+        <br>
+        <button class="ui larg teal submit button" (click)=nextFase()>Next</button>
+      </div>
+      <register-continuation *ngIf="state==2" [user]=user></register-continuation>
+    </div>
+  </div>
+</div>

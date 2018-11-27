@@ -1,0 +1,6 @@
+.ui.dropdown {
+    border: 1px solid rgba(34, 36, 38, .15);
+    border-radius: .28571429rem;
+    box-shadow: 0 0 0 0 transparent inset;
+    padding: 9px 37.4px 9px 14px; 
+}

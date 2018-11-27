@@ -1,0 +1,31 @@
+<div class="ui form">
+  <div class="ui stacked segment olive">
+    <h2 class="ui header olive">Credit card info:</h2>
+    <div class="ui left icon fluid field input" [ngClass]="{'error': ( cardNumber.invalid || !validateCard() ) && (cardNumber.dirty || cardNumber.touched)}">
+      <i class="credit card outline icon"></i>
+      <input type="text" placeholder="card number:" [(ngModel)]=user.data.cardNumber required #cardNumber="ngModel" (input)="invalid = false">
+    </div>
+    <div class="ui left icon fluid field input" [ngClass]="{'error': cardUser.invalid && (cardUser.dirty || cardUser.touched)}">
+      <i class="id badge outline icon"></i>
+      <input type="text" placeholder="name" [(ngModel)]=user.data.cardUser required #cardUser="ngModel" (input)="invalid = false">
+    </div>
+    <div class="ui left icon fluid field input" [ngClass]="{'error': (cardDate.invalid || !validateDate()) && (cardDate.dirty || cardDate.touched)}">
+      <i class="calendar outline icon"></i>
+      <input type="text" placeholder="MM/YY" [(ngModel)]=user.data.cardDate required #cardDate="ngModel" (input)="invalid = false">
+    </div>
+    <div class="ui left icon fluid field input" [ngClass]="{'error': (cardCVC.invalid || !validateCVC()) && (cardCVC.dirty || cardCVC.touched)}">
+      <i class="key icon"></i>
+      <input type="text" placeholder="CVC" [(ngModel)]=user.data.cardCVC required #cardCVC="ngModel" (input)="invalid = false">
+    </div>
+  </div>
+</div>
+<div class="ui fluid buttons">
+  <button class="ui olive button" routerLink='/home/create-order/shipping'>
+    Go back  
+  </button>
+  <div class="or" data-text="or"></div>
+  <button [disabled]="!formValid() || isLoading" class="ui positive green button" [ngClass]="{'loading':  isLoading}" (click)=createOrder()>
+      <i class="check square outline green icon"></i>  
+      Payment confirm
+  </button>
+</div>
